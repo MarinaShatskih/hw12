@@ -14,7 +14,7 @@ class TaskTest {
     @Test
     public void testSimpleTaskNotMatches() {
         SimpleTask task = new SimpleTask(123, "Позвонить домой");
-        Assertions.assertFalse(task.matches("Набрать"));
+        Assertions.assertFalse(task.matches("Написать"));
 
     }
 
@@ -80,7 +80,7 @@ class TaskTest {
 
     @Test
     public void testZeroTasksSearched() {
-        SimpleTask simpleTask = new SimpleTask(5, "Купить хлеб");
+        SimpleTask simpleTask = new SimpleTask(5, "Купить зубную пасту");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
@@ -99,15 +99,14 @@ class TaskTest {
         todos.add(meeting);
 
         Task[] expected = {};
-        Task[] actual = todos.search("обед");
+        Task[] actual = todos.search("кошки");
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void testFewTaskSearched() {
-        SimpleTask simpleTask = new SimpleTask(5, "Купить Хлеб");
-
-        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
+        SimpleTask simpleTask = new SimpleTask(5, "Купить хлеб}");
+        String[] subtasks = {"молоко", "яйца", "хлеб"};
         Epic epic = new Epic(55, subtasks);
 
         Meeting meeting = new Meeting(
@@ -124,7 +123,7 @@ class TaskTest {
         todos.add(meeting);
 
         Task[] expected = {simpleTask, epic};
-        Task[] actual = todos.search("Хлеб");
+        Task[] actual = todos.search("хлеб");
         Assertions.assertArrayEquals(expected, actual);
     }
 
